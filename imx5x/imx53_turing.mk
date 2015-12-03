@@ -8,8 +8,7 @@ PRODUCT_NAME := imx53_turing
 PRODUCT_DEVICE := imx53_turing
 
 PRODUCT_COPY_FILES += \
-	device/turing/imx53_turing/turing-keyboard.idc:system/usr/idc/turing-keyboard.idc                   \
-    device/turing/imx53_turing/turing-keyboard.kl:system/usr/keylayout/turing-keyboard.kl     			\
+    device/turing/imx53_turing/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl     						\
 	device/turing/imx53_turing/required_hardware.xml:system/etc/permissions/required_hardware.xml 		\
 	device/turing/imx53_turing/init.rc:root/init.freescale.rc 											\
     device/turing/imx53_turing/vold.fstab:system/etc/vold.fstab
