@@ -42,6 +42,19 @@ TARGET_RELEASETOOLS_EXTENSIONS := device/turing/imx6
 
 USE_QEMU_GPS_HARDWARE := false
 
+BOARD_USES_ALSA_AUDIO 			:= true
+BUILD_WITH_ALSA_UTILS 			:= true
+BOARD_HAVE_BLUETOOTH 			:= true
+USE_CAMERA_STUB 				:= false
+BOARD_CAMERA_LIBRARIES 			:= libcamera
+BOARD_HAVE_WIFI 				:= true
+BOARD_NOT_HAVE_MODEM 			:= true
+BOARD_MODEM_VENDOR 				:= 
+BOARD_MODEM_ID 					:= 
+BOARD_MODEM_HAVE_DATA_DEVICE 	:= true
+BOARD_HAVE_IMX_CAMERA 			:= true
+BOARD_HAVE_USB_CAMERA 			:= false
+
 #for accelerator sensor, need to define sensor type here
 BOARD_HAS_SENSOR := true
 SENSOR_MMA8451 := false
@@ -68,7 +81,7 @@ $(error "TARGET_USERIMAGES_USE_UBIFS and TARGET_USERIMAGES_USE_EXT4 config open 
 endif
 endif
 
-BOARD_KERNEL_CMDLINE := console=ttymxc4,115200 init=/init video=mxcfb0:dev=lcd,if=RGB24,bpp=32 video=mxcfb1:off video=mxcfb2:off video=mxcfb3:off vmalloc=256M androidboot.console=ttymxc4 consoleblank=0 androidboot.hardware=freescale cma=384M androidboot.selinux=disabled androidboot.dm_verity=disabled
+BOARD_KERNEL_CMDLINE := console=ttymxc4,115200 init=/init video=mxcfb0:dev=ldb,bpp=32 video=mxcfb1:dev=lcd,if=RGB24,bpp=32 video=mxcfb2:off video=mxcfb3:off vmalloc=256M androidboot.console=ttymxc4 consoleblank=0 androidboot.hardware=freescale cma=384M androidboot.selinux=disabled androidboot.dm_verity=disabled
 
 ifeq ($(TARGET_USERIMAGES_USE_UBIFS),true)
 #UBI boot command line.

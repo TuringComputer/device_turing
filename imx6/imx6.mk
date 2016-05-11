@@ -54,6 +54,18 @@ PRODUCT_PACKAGES += 					\
 	display_mode_fb2.conf               \
 	display_mode_fb4.conf
 
+#FREESCALE_EXTENDED
+PRODUCT_PACKAGES += freescale-extended 		\
+		    freescale-extended.xml
+
+# Broadcom firmwares
+PRODUCT_PACKAGES += \
+	Type_ZP.hcd   	\
+	bt_vendor.conf	\
+	bcmdhd.cal		\
+	fw_bcmdhd.bin	\
+	fw_bcmdhd_apsta.bin
+
 # Debug utils
 PRODUCT_PACKAGES += 		\
 	busybox					\
@@ -97,6 +109,9 @@ PRODUCT_PACKAGES += \
 	camera.imx6					\
 	power.imx6					\
 	audio.r_submix.default		\
+    libbt-vendor				\
+	libbt-vendor-broadcom		\
+	magd                        \
 	consumerir.imx6
 
 
@@ -105,6 +120,12 @@ PRODUCT_PACKAGES += 		\
 	libvpu					\
 	vpu_fw_imx6q.bin		\
 	vpu_fw_imx6d.bin		\
+
+# Intel PCIE wifi firmware
+PRODUCT_PACKAGES += 		\
+	iwlwifi-6000-4.ucode	\
+	iwlwifi-5000-5.ucode	\
+	iwlagn.ko
 
 # drm related lib
 PRODUCT_PACKAGES += 		\
@@ -293,6 +314,7 @@ PRODUCT_COPY_FILES +=	\
 	device/turing/common/tools/fsl-sdcard-partition-f2fs.sh:fsl-sdcard-partition-f2fs.sh				            \
 	device/turing/common/input/Dell_Dell_USB_Keyboard.kl:system/usr/keylayout/Dell_Dell_USB_Keyboard.kl 			\
 	device/turing/common/input/Dell_Dell_USB_Keyboard.idc:system/usr/idc/Dell_Dell_USB_Keyboard.idc 				\
+	device/turing/common/input/TSC2007_Touchscreen.idc:system/usr/idc/TSC2007_Touchscreen.idc       				\
 	system/core/rootdir/init.rc:root/init.rc 																		\
 	device/turing/imx6/etc/apns-conf.xml:system/etc/apns-conf.xml 													\
 	device/turing/imx6/etc/init.usb.rc:root/init.freescale.usb.rc 													\
