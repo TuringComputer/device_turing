@@ -4,12 +4,12 @@
 $(call inherit-product, device/turing/imx6/imx6.mk)
 $(call inherit-product-if-exists,vendor/google/products/gms.mk)
 
-ifneq ($(wildcard device/turing/mx6x_turing/fstab_nand.freescale),)
-$(shell touch device/turing/mx6x_turing/fstab_nand.freescale)
+ifneq ($(wildcard device/turing/mx6x_turing/fstab_nand.turing),)
+$(shell touch device/turing/mx6x_turing/fstab_nand.turing)
 endif
 
-ifneq ($(wildcard device/turing/mx6x_turing/fstab.freescale),)
-$(shell touch device/turing/mx6x_turing/fstab.freescale)
+ifneq ($(wildcard device/turing/mx6x_turing/fstab.turing),)
+$(shell touch device/turing/mx6x_turing/fstab.turing)
 endif
 
 # Overrides
@@ -17,9 +17,9 @@ PRODUCT_NAME := mx6x_turing
 PRODUCT_DEVICE := mx6x_turing
 
 PRODUCT_COPY_FILES += \
-	device/turing/mx6x_turing/init.rc:root/init.freescale.rc 								\
-    device/turing/mx6x_turing/init.i.MX6Q.rc:root/init.freescale.i.MX6Q.rc 					\
-    device/turing/mx6x_turing/init.i.MX6DL.rc:root/init.freescale.i.MX6DL.rc 				\
+	device/turing/mx6x_turing/init.rc:root/init.turing.rc 								\
+    device/turing/mx6x_turing/init.i.MX6Q.rc:root/init.turing.i.MX6Q.rc 					\
+    device/turing/mx6x_turing/init.i.MX6DL.rc:root/init.turing.i.MX6DL.rc 				\
 	device/turing/mx6x_turing/audio_policy.conf:system/etc/audio_policy.conf 				\
 	device/turing/mx6x_turing/audio_effects.conf:system/vendor/etc/audio_effects.conf
 

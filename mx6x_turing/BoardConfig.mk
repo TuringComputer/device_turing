@@ -13,24 +13,24 @@ include device/turing/imx6/imx6_target_fs.mk
 ifeq ($(BUILD_TARGET_DEVICE),sd)
 	ADDITIONAL_BUILD_PROPERTIES += ro.boot.storage_type=sd
 ifneq ($(BUILD_TARGET_FS),f2fs)
-	TARGET_RECOVERY_FSTAB = device/turing/mx6x_turing/fstab_sd.freescale
+	TARGET_RECOVERY_FSTAB = device/turing/mx6x_turing/fstab_sd.turing
 	# build for ext4
-	PRODUCT_COPY_FILES += device/turing/mx6x_turing/fstab_sd.freescale:root/fstab.freescale
+	PRODUCT_COPY_FILES += device/turing/mx6x_turing/fstab_sd.turing:root/fstab.turing
 else
-	TARGET_RECOVERY_FSTAB = device/turing/mx6x_turing/fstab_sd-f2fs.freescale
+	TARGET_RECOVERY_FSTAB = device/turing/mx6x_turing/fstab_sd-f2fs.turing
 	# build for f2fs
-	PRODUCT_COPY_FILES += device/turing/mx6x_turing/fstab_sd-f2fs.freescale:root/fstab.freescale
+	PRODUCT_COPY_FILES += device/turing/mx6x_turing/fstab_sd-f2fs.turing:root/fstab.turing
 endif # BUILD_TARGET_FS
 else
 	ADDITIONAL_BUILD_PROPERTIES += ro.boot.storage_type=emmc
 ifneq ($(BUILD_TARGET_FS),f2fs)
-	TARGET_RECOVERY_FSTAB = device/turing/mx6x_turing/fstab.freescale
+	TARGET_RECOVERY_FSTAB = device/turing/mx6x_turing/fstab.turing
 	# build for ext4
-	PRODUCT_COPY_FILES += device/turing/mx6x_turing/fstab.freescale:root/fstab.freescale
+	PRODUCT_COPY_FILES += device/turing/mx6x_turing/fstab.turing:root/fstab.turing
 else
-	TARGET_RECOVERY_FSTAB = device/turing/mx6x_turing/fstab-f2fs.freescale
+	TARGET_RECOVERY_FSTAB = device/turing/mx6x_turing/fstab-f2fs.turing
 	# build for f2fs
-	PRODUCT_COPY_FILES += device/turing/mx6x_turing/fstab-f2fs.freescale:root/fstab.freescale
+	PRODUCT_COPY_FILES += device/turing/mx6x_turing/fstab-f2fs.freescale:root/fstab.turing
 endif # BUILD_TARGET_FS
 endif # BUILD_TARGET_DEVICE
 
@@ -81,7 +81,7 @@ $(error "TARGET_USERIMAGES_USE_UBIFS and TARGET_USERIMAGES_USE_EXT4 config open 
 endif
 endif
 
-BOARD_KERNEL_CMDLINE := console=ttymxc4,115200 init=/init video=mxcfb0:dev=ldb,bpp=32 video=mxcfb1:dev=lcd,if=RGB24,bpp=32 video=mxcfb2:off video=mxcfb3:off vmalloc=256M androidboot.console=ttymxc4 consoleblank=0 androidboot.hardware=freescale cma=384M androidboot.selinux=disabled androidboot.dm_verity=disabled
+BOARD_KERNEL_CMDLINE := console=ttymxc4,115200 init=/init video=mxcfb0:dev=ldb,bpp=32 video=mxcfb1:dev=lcd,bpp=32 video=mxcfb2:off video=mxcfb3:off vmalloc=256M androidboot.console=ttymxc4 consoleblank=0 androidboot.hardware=turing cma=384M androidboot.selinux=disabled androidboot.dm_verity=disabled
 
 ifeq ($(TARGET_USERIMAGES_USE_UBIFS),true)
 #UBI boot command line.

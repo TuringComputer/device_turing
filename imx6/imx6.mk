@@ -2,8 +2,8 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/generic.mk)
 $(call inherit-product, $(TOPDIR)frameworks/base/data/sounds/AllAudio.mk)
 # overrides
-PRODUCT_BRAND := Freescale
-PRODUCT_MANUFACTURER := Freescale
+PRODUCT_BRAND := Turing
+PRODUCT_MANUFACTURER := Turing
 
 # Android infrastructures
 PRODUCT_PACKAGES += 					\
@@ -317,8 +317,8 @@ PRODUCT_COPY_FILES +=	\
 	device/turing/common/input/TSC2007_Touchscreen.idc:system/usr/idc/TSC2007_Touchscreen.idc       				\
 	system/core/rootdir/init.rc:root/init.rc 																		\
 	device/turing/imx6/etc/apns-conf.xml:system/etc/apns-conf.xml 													\
-	device/turing/imx6/etc/init.usb.rc:root/init.freescale.usb.rc 													\
-	device/turing/imx6/etc/ueventd.freescale.rc:root/ueventd.freescale.rc 											\
+	device/turing/imx6/etc/init.usb.rc:root/init.turing.usb.rc 													\
+	device/turing/imx6/etc/ueventd.turing.rc:root/ueventd.turing.rc 											\
 	device/turing/imx6/etc/ppp/init.gprs-pppd:system/etc/ppp/init.gprs-pppd 										\
 	device/turing/imx6/etc/ota.conf:system/etc/ota.conf 															\
     device/turing/imx6/init.recovery.imx6.rc:root/init.recovery.imx6.rc 											\
