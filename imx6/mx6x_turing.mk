@@ -17,9 +17,9 @@ PRODUCT_NAME := mx6x_turing
 PRODUCT_DEVICE := mx6x_turing
 
 PRODUCT_COPY_FILES += \
-	device/turing/mx6x_turing/init.rc:root/init.turing.rc 								\
+	device/turing/mx6x_turing/init.rc:root/init.turing.rc 									\
     device/turing/mx6x_turing/init.i.MX6Q.rc:root/init.turing.i.MX6Q.rc 					\
-    device/turing/mx6x_turing/init.i.MX6DL.rc:root/init.turing.i.MX6DL.rc 				\
+    device/turing/mx6x_turing/init.i.MX6DL.rc:root/init.turing.i.MX6DL.rc 					\
 	device/turing/mx6x_turing/audio_policy.conf:system/etc/audio_policy.conf 				\
 	device/turing/mx6x_turing/audio_effects.conf:system/vendor/etc/audio_effects.conf
 
@@ -65,7 +65,6 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.touchscreen.xml:system/etc/permissions/android.hardware.touchscreen.xml \
 	frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
 	frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
-	frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
 	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
 	frameworks/native/data/etc/android.software.print.xml:system/etc/permissions/android.software.print.xml \
 	frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
@@ -73,4 +72,5 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.software.webview.xml:system/etc/permissions/android.software.webview.xml \
 	\
 	device/turing/mx6x_turing/required_hardware.xml:system/etc/permissions/required_hardware.xml
+	
 PRODUCT_PACKAGES += AudioRoute

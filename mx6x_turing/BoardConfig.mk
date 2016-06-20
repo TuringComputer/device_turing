@@ -40,24 +40,46 @@ PRODUCT_MODEL := TURING-MX6x
 
 TARGET_RELEASETOOLS_EXTENSIONS := device/turing/imx6
 
-USE_QEMU_GPS_HARDWARE := false
 
-BOARD_USES_ALSA_AUDIO 			:= true
-BUILD_WITH_ALSA_UTILS 			:= true
-BOARD_HAVE_BLUETOOTH 			:= true
-USE_CAMERA_STUB 				:= false
-BOARD_CAMERA_LIBRARIES 			:= libcamera
-BOARD_HAVE_WIFI 				:= true
-BOARD_NOT_HAVE_MODEM 			:= true
-BOARD_MODEM_VENDOR 				:= 
-BOARD_MODEM_ID 					:= 
-BOARD_MODEM_HAVE_DATA_DEVICE 	:= true
-BOARD_HAVE_IMX_CAMERA 			:= true
-BOARD_HAVE_USB_CAMERA 			:= false
+# Sensors HAL based on STMemsAndroidHAL
+BOARD_ENABLED_SENSORS            := LSM9DS1
+BOARD_ENABLED_SENSORS_MODULES    := SENSOR_FUSION
+
+# GPS
+USE_QEMU_GPS_HARDWARE            := false
+BOARD_HAVE_TURING_GPS			 := true
+
+# Audio
+BOARD_USES_ALSA_AUDIO 			 := true
+BUILD_WITH_ALSA_UTILS 			 := true
+
+# Bluetooth
+BOARD_HAVE_BLUETOOTH 			 := true
+
+# Wifi
+BOARD_WPA_SUPPLICANT_DRIVER  	 := NL80211
+BOARD_WLAN_VENDOR				 := TURING
+WPA_SUPPLICANT_VERSION       	 := VER_0_8_X
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_turing
+BOARD_WLAN_DEVICE                := TURING
+BOARD_HOSTAPD_DRIVER             := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_turing
+
+# 3G
+BOARD_NOT_HAVE_MODEM 			 := true
+BOARD_MODEM_VENDOR 				 := 
+BOARD_MODEM_ID 					 := 
+BOARD_MODEM_HAVE_DATA_DEVICE 	 := true
+BOARD_SIERRA_RIL				 := AT
+
+# Cameras
+BOARD_HAVE_IMX_CAMERA 			 := true
+BOARD_HAVE_USB_CAMERA 			 := false
+BOARD_CAMERA_LIBRARIES 			 := libcamera
+USE_CAMERA_STUB 				 := false
 
 #for accelerator sensor, need to define sensor type here
 BOARD_HAS_SENSOR := true
-SENSOR_MMA8451 := false
 
 # for recovery service
 TARGET_SELECT_KEY := 28
@@ -68,6 +90,15 @@ DM_VERITY_RUNTIME_CONFIG := true
 # uncomment below lins if use NAND
 #TARGET_USERIMAGES_USE_UBIFS = true
 
+TARGET_KERNEL_MODULES :=																				\
+	kernel_imx/crypto/tcrypt.ko:system/lib/modules/tcrypt.ko											\
+	kernel_imx/drivers/net/wireless/atmel/wilc3000/at_pwr_dev.ko:system/lib/modules/at_pwr_dev.ko		\
+	kernel_imx/drivers/net/wireless/atmel/wilc3000/wilc3000.ko:system/lib/modules/wilc3000.ko			\
+	kernel_imx/drivers/net/wireless/iwlwifi/iwlwifi.ko:system/lib/modules/iwlwifi.ko 					\
+	kernel_imx/drivers/net/wireless/iwlwifi/mvm/iwlmvm.ko:system/lib/modules/iwlmvm.ko 					\
+	kernel_imx/drivers/net/wireless/iwlwifi/dvm/iwldvm.ko:system/lib/modules/iwldvm.ko 					\
+	kernel_imx/net/mac80211/mac80211.ko:system/lib/modules/mac80211.ko 									\
+	kernel_imx/net/wireless/cfg80211.ko:system/lib/modules/cfg80211.ko 									\
 
 ifeq ($(TARGET_USERIMAGES_USE_UBIFS),true)
 UBI_ROOT_INI := device/turing/mx6x_turing/ubi/ubinize.ini
@@ -81,7 +112,7 @@ $(error "TARGET_USERIMAGES_USE_UBIFS and TARGET_USERIMAGES_USE_EXT4 config open 
 endif
 endif
 
-BOARD_KERNEL_CMDLINE := console=ttymxc4,115200 init=/init video=mxcfb0:dev=ldb,bpp=32 video=mxcfb1:dev=lcd,bpp=32 video=mxcfb2:off video=mxcfb3:off vmalloc=256M androidboot.console=ttymxc4 consoleblank=0 androidboot.hardware=turing cma=384M androidboot.selinux=disabled androidboot.dm_verity=disabled
+BOARD_KERNEL_CMDLINE := console=ttymxc4,115200 init=/init video=mxcfb0:dev=ldb,bpp=32 video=mxcfb1:dev=lcd,bpp=32 video=mxcfb2:off video=mxcfb3:off vmalloc=256M androidboot.console=ttymxc4 consoleblank=0 androidboot.hardware=turing cma=384M androidboot.selinux=disabled androidboot.dm_verity=disabled no_console_suspend
 
 ifeq ($(TARGET_USERIMAGES_USE_UBIFS),true)
 #UBI boot command line.

@@ -41,13 +41,15 @@ PRODUCT_PACKAGES += 					\
 	ip-up-vpn							\
 	ip-up-ppp0							\
 	ip-down-ppp0						\
-	rtl_wpa_supplicant					\
 	wpa_supplicant						\
+	wpa_cli								\
 	wpa_supplicant.conf					\
+	hostapd.conf						\
 	p2p_supplicant_overlay.conf			\
 	wpa_supplicant_overlay.conf			\
     p2p_supplicant_advance_overlay.conf \
 	dispd								\
+	rfkill								\
 	ts_calibrator						\
 	libion                              \
 	display_mode_fb0.conf               \
@@ -56,15 +58,7 @@ PRODUCT_PACKAGES += 					\
 
 #FREESCALE_EXTENDED
 PRODUCT_PACKAGES += freescale-extended 		\
-		    freescale-extended.xml
-
-# Broadcom firmwares
-PRODUCT_PACKAGES += \
-	Type_ZP.hcd   	\
-	bt_vendor.conf	\
-	bcmdhd.cal		\
-	fw_bcmdhd.bin	\
-	fw_bcmdhd_apsta.bin
+		    		freescale-extended.xml
 
 # Debug utils
 PRODUCT_PACKAGES += 		\
@@ -77,7 +71,6 @@ PRODUCT_PACKAGES += 		\
 
 # Wifi AP mode
 PRODUCT_PACKAGES += 		\
-	rtl_hostapd 			\
 	hostapd					\
 	hostapd_cli
 
@@ -110,9 +103,8 @@ PRODUCT_PACKAGES += \
 	power.imx6					\
 	audio.r_submix.default		\
     libbt-vendor				\
-	libbt-vendor-broadcom		\
-	magd                        \
-	consumerir.imx6
+	consumerir.imx6				\
+	sensors.turing				\
 
 
 # Freescale VPU firmware files.
@@ -123,9 +115,50 @@ PRODUCT_PACKAGES += 		\
 
 # Intel PCIE wifi firmware
 PRODUCT_PACKAGES += 		\
-	iwlwifi-6000-4.ucode	\
+	iwlwifi-1000-3.ucode	\
+	iwlwifi-1000-5.ucode	\
+	iwlwifi-100-5.ucode		\
+	iwlwifi-105-6.ucode		\
+	iwlwifi-135-6.ucode		\
+	iwlwifi-2000-6.ucode	\
+	iwlwifi-2030-6.ucode	\
+	iwlwifi-3160-7.ucode	\
+	iwlwifi-3160-8.ucode	\
+	iwlwifi-3160-9.ucode	\
+	iwlwifi-3160-10.ucode	\
+	iwlwifi-3160-12.ucode	\
+	iwlwifi-3160-13.ucode	\
+	iwlwifi-3945-2.ucode	\
+	iwlwifi-4965-2.ucode	\
+	iwlwifi-5000-1.ucode	\
+	iwlwifi-5000-2.ucode	\
 	iwlwifi-5000-5.ucode	\
-	iwlagn.ko
+	iwlwifi-5150-2.ucode	\
+	iwlwifi-6000-4.ucode	\
+	iwlwifi-6000g2a-5.ucode	\
+	iwlwifi-6000g2a-6.ucode	\
+	iwlwifi-6000g2b-5.ucode	\
+	iwlwifi-6000g2b-6.ucode	\
+	iwlwifi-6050-4.ucode	\
+	iwlwifi-6050-5.ucode	\
+	iwlwifi-7260-7.ucode	\
+	iwlwifi-7260-8.ucode	\
+	iwlwifi-7260-9.ucode	\
+	iwlwifi-7265-8.ucode	\
+	iwlwifi-7265-9.ucode	\
+	iwlwifi-7265-10.ucode	\
+	iwlwifi-7265-12.ucode	\
+	iwlwifi-7265-13.ucode	\
+	iwlwifi-7265D-10.ucode	\
+	iwlwifi-7265D-12.ucode	\
+	iwlwifi-7265D-13.ucode	\
+	iwlwifi-8000C-13.ucode	\
+
+# Atmel Wireless Firmwares
+PRODUCT_PACKAGES += 			\
+	wilc1000_wifi_firmware.bin 	\
+	wilc3000_bt_firmware.bin	\
+	wilc3000_wifi_firmware.bin 	\
 
 # drm related lib
 PRODUCT_PACKAGES += 		\
@@ -317,8 +350,8 @@ PRODUCT_COPY_FILES +=	\
 	device/turing/common/input/TSC2007_Touchscreen.idc:system/usr/idc/TSC2007_Touchscreen.idc       				\
 	system/core/rootdir/init.rc:root/init.rc 																		\
 	device/turing/imx6/etc/apns-conf.xml:system/etc/apns-conf.xml 													\
-	device/turing/imx6/etc/init.usb.rc:root/init.turing.usb.rc 													\
-	device/turing/imx6/etc/ueventd.turing.rc:root/ueventd.turing.rc 											\
+	device/turing/imx6/etc/init.usb.rc:root/init.turing.usb.rc 														\
+	device/turing/imx6/etc/ueventd.turing.rc:root/ueventd.turing.rc 												\
 	device/turing/imx6/etc/ppp/init.gprs-pppd:system/etc/ppp/init.gprs-pppd 										\
 	device/turing/imx6/etc/ota.conf:system/etc/ota.conf 															\
     device/turing/imx6/init.recovery.imx6.rc:root/init.recovery.imx6.rc 											\

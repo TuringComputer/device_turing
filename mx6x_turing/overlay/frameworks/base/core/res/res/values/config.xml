@@ -187,6 +187,7 @@
 
     <!-- This device is not "voice capable"; it's data-only. -->
     <bool name="config_voice_capable">false</bool>
+    <bool name="config_sms_capable">true</bool>
 
     <!-- Max space (in MB) allocated to DownloadManager to store the downloaded files
          if they are to be stored in DownloadManager's data dir,
