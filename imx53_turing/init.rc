@@ -40,8 +40,8 @@ on boot
     setprop ro.HDMI_AUDIO_OUTPUT 0
 
     # Video output choices for dual display
-    setprop rw.SIN_VIDEO_DUAL_UI 0
-	setprop rw.DUAL_VIDEO_SIN_UI 1
+    setprop rw.SIN_VIDEO_DUAL_UI 1
+	setprop rw.DUAL_VIDEO_SIN_UI 0
 
 service wpa_supplicant /system/bin/wlan_tool wpa_supplicant
     socket wpa_wlan0 dgram 660 root wifi
