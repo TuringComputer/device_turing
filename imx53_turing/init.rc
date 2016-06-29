@@ -31,19 +31,17 @@ on boot
     setprop ro.opengles.version 131072
 
     # Disable UI output for second display during video playback
-    setprop ro.secfb.disable-overlay  0
+    setprop ro.secfb.disable-overlay  1
 
     # Enable auto configuration with 1, disable with 0
-    setprop ro.AUTO_CONFIG_DISPLAY  1
+    setprop rw.AUTO_CONFIG_DISPLAY  0
+
+    # hdmi audio output
+    setprop ro.HDMI_AUDIO_OUTPUT 0
 
     # Video output choices for dual display
-    # Video on secondary display
-    setprop ro.SIN_VIDEO_DUAL_UI 1
-    # UI on primary display
-    #(seconday display no more than 720P for imx53)
-    setprop ro.DUAL_VIDEO_SIN_UI 0
-    # Unsupported
-    #setprop ro.DUAL_VIDEO_DUAL_UI 0
+    setprop rw.SIN_VIDEO_DUAL_UI 0
+	setprop rw.DUAL_VIDEO_SIN_UI 1
 
 service wpa_supplicant /system/bin/wlan_tool wpa_supplicant
     socket wpa_wlan0 dgram 660 root wifi
