@@ -130,8 +130,13 @@ IMX_CAMERA_HAL_V2 := true
 IMX6_CONSUMER_IR_HAL := true
 
 TARGET_BOOTLOADER_USE_SPL := true
+ifeq ($(TURING_SMART_VARIANT),true)
+TARGET_BOOTLOADER_CONFIG  := imx6q:mx6turing_smart_android_defconfig
+TARGET_BOARD_DTS_CONFIG   := imx6q:imx6q-turing-eval.dtb
+else
 TARGET_BOOTLOADER_CONFIG  := imx6q:mx6turing_android_defconfig imx6dl:mx6turing_android_defconfig
 TARGET_BOARD_DTS_CONFIG   := imx6q:imx6q-turing-eval.dtb imx6dl:imx6dl-turing-eval.dtb
+endif
 
 BOARD_SEPOLICY_DIRS := 						\
        device/turing/imx6/sepolicy 			\
