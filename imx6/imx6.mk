@@ -102,7 +102,7 @@ PRODUCT_PACKAGES += \
 	camera.imx6					\
 	power.imx6					\
 	audio.r_submix.default		\
-    libbt-vendor				\
+	libbt-vendor				\
 	consumerir.imx6				\
 	sensors.turing				\
 

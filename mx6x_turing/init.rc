@@ -1,5 +1,5 @@
-import init.${ro.hardware}.usb.rc
 import init.${ro.hardware}.${ro.soc}.rc
+import init.${ro.hardware}.wifi.rc
 
 on init
     start watchdogd
@@ -78,7 +78,7 @@ on boot
     setprop alsa.mixer.playback.headset Headphone
     setprop alsa.mixer.capture.headset Capture
 
-	######################################################
+    ######################################################
     # Prepare for Sensors
     ######################################################
     chown system system /sys/class/input/event2/device/device/accelerometer/anti_aliasing_frequency
@@ -107,35 +107,37 @@ on boot
     chmod 0664 /sys/class/input/event3/device/device/gyroscope/range
     ######################################################
 
-	######################################################
+    ######################################################
     # Prepare for Wifi
     ######################################################
     insmod /system/lib/modules/cfg80211.ko  
-    insmod /system/lib/modules/mac80211.ko
-    
-    # For Intel Wireless, run the following  
-    insmod /system/lib/modules/iwlwifi.ko  
-    insmod /system/lib/modules/iwlmvm.ko
-    insmod /system/lib/modules/iwldvm.ko  
-    
-    # For AT WILC3000, run the following commands
-    #insmod /system/lib/modules/at_pwr_dev.ko
-    #insmod /system/lib/modules/wilc3000.ko
-    
-    setprop wlan.interface wlan0
+    insmod /system/lib/modules/mac80211.ko      
+    insmod /system/lib/modules/at_pwr_dev.ko    
+	//insmod /system/lib/modules/wilc3000.ko
+
     setprop wifi.interface wlan0
     setprop wifi.ap.interface wlan0
-    setprop wlan.driver.status "ok"
+    setprop wlan.interface wlan0
+
+	#usada internamente quando é modo builtin (wifi_turing.c linha 267)
+	#setprop wlan.driver.status "ok"
+    
     ######################################################
 
     # Prepare for bluetooth
-    chmod 665 /sys/class/rfkill/rfkill0/state
-    chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/state
-    write /sys/class/rfkill/rfkill0/state 0
+   ##chown bluetooth net_bt_stack /dev/at_pwr_dev
+   ## chmod 0660 /dev/ttymxc2
+   ## chown bluetooth net_bt_stack /dev/ttymxc2
+   ## chmod 665 /sys/class/rfkill/rfkill0/state
+   ## chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/state
+    
+   ## setprop hw.bluetooth 1
+
+   ## write /sys/class/rfkill/rfkill0/state 0
 
     # Prepare for RIL
-    setprop gsm.ril.delay 15
-    setprop ro.ril.wake_lock_timeout 300
+   ## setprop gsm.ril.delay 15
+   ## setprop ro.ril.wake_lock_timeout 300
 
 
 #  Enable adb security for JB4.2.2
@@ -190,7 +192,6 @@ on boot
     class core
     seclabel u:r:watchdogd:s0
 
-
 on charger
     # Enable Power modes and set the CPU Freq Sampling rates
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "powersave"
@@ -234,22 +235,10 @@ on property:sys.interactive="active"
     chown system system /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
     chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
 
-service p2p_supplicant /system/bin/wpa_supplicant -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf -N -ip2p0 -Dnl80211 -c/data/misc/wifi/p2p_supplicant.conf -e/data/misc/wifi/entropy.bin -puse_p2p_group_interface=1
-    class late_start
-    socket wpa_wlan0 dgram 660 wifi wifi
-    disabled
-    oneshot
-
-service wpa_supplicant /system/bin/wpa_supplicant -iwlan0 -d -d -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf -I/system/etc/wifi/wpa_supplicant_overlay.conf -O/data/misc/wifi/sockets -e/data/misc/wifi/entropy.bin -g@android:wpa_wlan0  
-    socket wpa_wlan0 dgram 660 wifi wifi  
-    class late_start  
-    disabled  
-    oneshot 
-
 service charger /charger
     class charger
 
-service dhcpcd_wlan0 /system/bin/dhcpcd -aABDKL
+service dhcpcd_eth0 /system/bin/dhcpcd -ABKL
     class main
     disabled
     oneshot
@@ -259,17 +248,7 @@ service dhcpcd_p2p /system/bin/dhcpcd -aABKL
     disabled
     oneshot
 
-service dhcpcd_eth0 /system/bin/dhcpcd -ABKL
-    class main
-    disabled
-    oneshot
-
 service dhcpcd_bt-pan /system/bin/dhcpcd -ABKL
-    class main
-    disabled
-    oneshot
-
-service iprenew_wlan0 /system/bin/dhcpcd -n
     class main
     disabled
     oneshot
@@ -289,13 +268,6 @@ service iprenew_bt-pan /system/bin/dhcpcd -n
     disabled
     oneshot
 
-service hostapd /system/bin/hostapd /data/misc/wifi/hostapd.conf
-    socket hostapd_wlan0 dgram 660 root wifi
-    user root
-    group wifi
-    oneshot
-    disabled
-
 service ril-daemon /system/bin/rild
     class main
     socket rild stream 660 root radio
@@ -310,11 +282,6 @@ service pppd_gprs /etc/ppp/init.gprs-pppd
     group radio cache inet misc
     disabled
     oneshot
-
-service wifi_mac /system/bin/sh /system/etc/check_wifi_mac.sh
-    class late_start
-    oneshot
-
 
 # virtual sdcard daemon running as media_rw (1023)
 # default 4 threads have better performance to 2 threads.
@@ -332,3 +299,4 @@ on post-fs
     # Swap in only 1 page at a time
     write /proc/sys/vm/page-cluster 0
 
+	

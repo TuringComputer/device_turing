@@ -20,12 +20,26 @@ PRODUCT_COPY_FILES += \
 	device/turing/mx6x_turing/init.rc:root/init.turing.rc 									\
     device/turing/mx6x_turing/init.i.MX6Q.rc:root/init.turing.i.MX6Q.rc 					\
     device/turing/mx6x_turing/init.i.MX6DL.rc:root/init.turing.i.MX6DL.rc 					\
+    device/turing/mx6x_turing/init.wifi.rc:root/init.turing.wifi.rc 					\
 	device/turing/mx6x_turing/audio_policy.conf:system/etc/audio_policy.conf 				\
 	device/turing/mx6x_turing/audio_effects.conf:system/vendor/etc/audio_effects.conf
 
 PRODUCT_COPY_FILES +=	\
 	external/linux-firmware-imx/firmware/vpu/vpu_fw_imx6d.bin:system/lib/firmware/vpu/vpu_fw_imx6d.bin 	\
 	external/linux-firmware-imx/firmware/vpu/vpu_fw_imx6q.bin:system/lib/firmware/vpu/vpu_fw_imx6q.bin
+
+PREBUILD_FIRMWARE := wilc3000
+
+#wifi modules
+ifeq ($(PREBUILD_FIRMWARE), wilc3000)
+PRODUCT_COPY_FILES += device/turing/common/wlan/atmel/wilc3000.ko:system/lib/modules/wilc3000.ko
+PRODUCT_COPY_FILES += device/turing/common/wlan/atmel/at_pwr_dev.ko:system/lib/modules/at_pwr_dev.ko
+endif
+
+PRODUCT_COPY_FILES += \
+	frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml \
+	frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml
+
 # setup dm-verity configs.
 ifneq ($(BUILD_TARGET_DEVICE),sd)
  PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/mmcblk3p5
@@ -66,6 +80,7 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
 	frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
 	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
+	frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
 	frameworks/native/data/etc/android.software.print.xml:system/etc/permissions/android.software.print.xml \
 	frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
 	frameworks/native/data/etc/android.software.voice_recognizers.xml:system/etc/permissions/android.software.voice_recognizers.xml \
